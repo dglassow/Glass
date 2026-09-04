@@ -10,20 +10,6 @@
 </p>
 
 <p align="center">
-  <a href="../../releases/latest"><img src="https://img.shields.io/github/v/release/dglassow/Glass?label=download&color=2ea44f&style=for-the-badge" alt="Latest release"></a>
-  <img src="https://img.shields.io/badge/platform-macOS%20Apple%20Silicon-lightgrey?style=for-the-badge" alt="Platform">
-  <img src="https://img.shields.io/badge/license-proprietary-blue?style=for-the-badge" alt="License">
-</p>
-
-<p align="center">
-  <a href="../../releases/latest">Download</a> ·
-  <a href="#why-glass">Why</a> ·
-  <a href="#what-you-can-do">Features</a> ·
-  <a href="#is-it-for-you">Is it for you?</a> ·
-  <a href="#questions">FAQ</a>
-</p>
-
-<p align="center">
   <img src="assets/glass.png" alt="The Glass app: AI assistants, rooms, and live sessions across four computers" width="100%">
 </p>
 
