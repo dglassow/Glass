@@ -85,4 +85,4 @@ This repository holds the downloads, the license, and the notices for other
 people's software included in the app. The source is developed privately.
 
 Third-party components keep their own licenses, reproduced in full in
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+[assets/third-party-notices.md](assets/third-party-notices.md).
