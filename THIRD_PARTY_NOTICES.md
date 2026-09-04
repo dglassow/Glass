@@ -1,27 +1,14 @@
 # Third-party notices
 
-Glass incorporates material derived from OpenMausBot, which is licensed under the Apache License, Version 2.0.
-The OpenMausBot NOTICE and the full license text are reproduced below.
-Every Glass file that carries derived material starts with a provenance header naming the upstream path, so the origin of each lifted file is visible in the file itself.
-The derived-files section at the end of this document is generated from those headers by `tests/p10-legal.mjs`, which also fails when a header is missing from the list or when upstream product tokens leak into the tree.
+Glass includes third-party components that are licensed under their own terms.
+Those terms govern those components and are not limited by the Glass license.
+The complete license texts are reproduced below.
 
-## Provenance header
+Files inside Glass that derive from OpenMausBot each begin with a provenance
+header naming the upstream path they were lifted from, so the origin of the
+derived material is visible in the file itself.
 
-For `.mjs`, `.ts`, and `.rs` files the header is the first comment in the file (after the shebang, when there is one):
-
-```
-// Derived from OpenMausBot <path> (Apache-2.0). Copyright 2026 Milind Soni and OpenMausBot contributors. Modified for Glass.
-```
-
-For CSS the same text rides in a block comment:
-
-```
-/* Derived from OpenMausBot <path> (Apache-2.0). Copyright 2026 Milind Soni and OpenMausBot contributors. Modified for Glass. */
-```
-
-`<path>` is the file's path inside the OpenMausBot repository at the revision it was lifted from.
-When one Glass file consolidates several upstream files, `<path>` is a comma-separated list of those paths on the same line.
-The header is always a single line and must appear within the first five lines of the file.
+---
 
 ## OpenMausBot (Apache-2.0)
 
@@ -243,72 +230,133 @@ incorporated before the transition.
    limitations under the License.
 ```
 
+---
+
 ## Cua Driver (MIT)
 
-Added when the driver is bundled (Phase 10 M3); see third_party/cua-driver/NOTICES.md
+Glass redistributes one executable from the official Cua Driver release, used
+for host computer control. Copyright (c) 2025 Cua AI, Inc.
+Upstream: <https://github.com/trycua/cua>
 
-## Derived files
+```
+MIT License
 
-<!-- derived-files: maintained by tests/p10-legal.mjs --check -->
+Copyright (c) 2025 Cua AI, Inc.
 
-- `packages/botd/src/approvals.ts` (from `server/peer-approval.ts`)
-- `packages/botd/src/ask.ts` (from `server/index.ts`)
-- `packages/botd/src/attachments.ts` (from `server/attachments.ts`)
-- `packages/botd/src/auto-approve.ts` (from `server/auto-approve.ts`)
-- `packages/botd/src/bot-cwd.ts` (from `server/bot-cwd.ts`)
-- `packages/botd/src/comms.ts` (from `server/comms-visibility.ts`)
-- `packages/botd/src/computer/control.ts` (from `server/computer-control.ts`)
-- `packages/botd/src/computer/frame-gate.ts` (from `server/screen-frame-gate.ts`)
-- `packages/botd/src/computer/lease.ts` (from `server/local-vm-lease.ts`)
-- `packages/botd/src/computer/local-computer.ts` (from `server/local-computer.ts`)
-- `packages/botd/src/computer/observation.ts` (from `server/computer-observation.ts`)
-- `packages/botd/src/computer/private-capture.ts` (from `server/private-screen-capture.ts`)
-- `packages/botd/src/decision-log.ts` (from `server/decision-log.ts`)
-- `packages/botd/src/delegate.ts` (from `server/index.ts`)
-- `packages/botd/src/delegations.ts` (from `server/delegations.ts`)
-- `packages/botd/src/events.ts` (from `server/contracts.ts`)
-- `packages/botd/src/fold.ts` (from `server/index.ts`)
-- `packages/botd/src/goal-run.ts` (from `server/group-goal-run.ts`)
-- `packages/botd/src/guards.ts` (from `server/turn-dispatch-guard.ts`, `server/turn-watchdog.ts`, `server/room-turn-timeout.ts`)
-- `packages/botd/src/message-db.ts` (from `server/message-db.ts`)
-- `packages/botd/src/names.ts` (from `server/names.ts`)
-- `packages/botd/src/notify.ts` (from `server/notify.ts`)
-- `packages/botd/src/peer-approval-key.ts` (from `server/peer-approval-key.ts`)
-- `packages/botd/src/permission-broker.ts` (from `server/drivers/claude.ts`)
-- `packages/botd/src/prompts.ts` (from `server/chief-of-staff.ts`, `server/member-turn.ts`)
-- `packages/botd/src/proxies/agents-proxy.ts` (from `server/drivers/agents-proxy.ts`)
-- `packages/botd/src/proxies/permission-proxy.ts` (from `server/permission-proxy.ts`)
-- `packages/botd/src/queues.ts` (from `server/steer-queue.ts`, `server/channel-queue.ts`)
-- `packages/botd/src/room-cwd.ts` (from `server/room-cwd.ts`)
-- `packages/botd/src/rooms.ts` (from `server/index.ts`)
-- `packages/botd/src/routine-requests.ts` (from `server/routine-requests.ts`)
-- `packages/botd/src/routines.ts` (from `server/routines.ts`)
-- `packages/botd/src/shared/bot-avatar.ts` (from `shared/bot-avatar.ts`)
-- `packages/botd/src/shared/bot-profile.ts` (from `shared/bot-profile.ts`)
-- `packages/botd/src/shared/credential-request.ts` (from `shared/credential-request.ts`)
-- `packages/botd/src/shared/group-goal-run.ts` (from `shared/group-goal-run.ts`)
-- `packages/botd/src/shared/mascot-bodies.ts` (from `shared/mascot-bodies.ts`)
-- `packages/botd/src/shared/routine-request.ts` (from `shared/routine-request.ts`)
-- `packages/botd/src/shared/routine-run.ts` (from `shared/routine-run.ts`)
-- `packages/botd/src/shared/skill-request.ts` (from `shared/skill-request.ts`)
-- `packages/botd/src/skills-feed.ts` (from `server/skills.ts`)
-- `packages/botd/src/store.ts` (from `server/store.ts`)
-- `packages/botd/src/thread-events.ts` (from `server/thread-events.ts`)
-- `packages/botd/src/turn-context.ts` (from `server/turn-context.ts`)
-- `packages/botd/src/turns.ts` (from `server/index.ts`)
-- `packages/botd/src/util/atomic.ts` (from `server/atomic.ts`)
-- `packages/botd/src/util/env-path.ts` (from `server/env-path.ts`)
-- `packages/botd/src/util/procs.ts` (from `server/procs.ts`)
-- `packages/botd/src/util/redact.ts` (from `server/redact.ts`)
-- `packages/botd/src/workspace.ts` (from `server/workspace.ts`)
-- `packages/desktop/glass-cua-host.mjs` (from `electron/cua.mjs`, `electron/cua-connection.cjs`, `electron/cua-linux-runtime.cjs`)
-- `packages/desktop/glass-cua-linux.mjs` (from `electron/capabilities.cjs`, `electron/cua-linux.cjs`)
-- `packages/desktop/prepare-cua.sh` (from `scripts/prepare-cua.mjs`, `scripts/cua-linux-release.mjs`)
-- `packages/sessiond/src/mounts.ts` (from `server/config.ts`)
-- `packages/viewer/src/bots-events.ts` (from `src/state/store.tsx`)
-- `packages/viewer/src/bots-reducer.ts` (from `src/state/store.tsx`)
-- `packages/viewer/src/shell.css` (from `src/styles.css`)
-- `packages/viewer/src/skins.ts` (from `src/lib/skins.ts`)
-- `tests/fakes/fake-acp-cli.mjs` (from `server/testing/fake-acp-cli.ts`)
-- `tests/fakes/fake-claude-cli.mjs` (from `server/testing/fake-claude-cli.ts`)
-- `tests/fakes/fake-codex-app-server.mjs` (from `server/testing/fake-codex-app-server.ts`)
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+---
+
+## Inter (SIL Open Font License 1.1)
+
+The redistributed Cua Driver executable embeds the Inter typeface for its
+on-screen cursor badge.
+
+```
+Copyright 2020 The Inter Project Authors (https://github.com/rsms/inter)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://scripts.sil.org/OFL
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded,
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply to any
+document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may include
+source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical writer or
+other person who contributed to the Font Software.
+
+PERMISSION & CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of the Font Software, to use, study, copy, merge, embed, modify, redistribute,
+and sell modified and unmodified copies of the Font Software, subject to the
+following conditions:
+
+1) Neither the Font Software nor any of its individual components, in
+Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy contains
+the above copyright notice and this license. These can be included either as
+stand-alone text files, human-readable headers or in the appropriate
+machine-readable metadata fields within text or binary files as long as those
+fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font Name(s)
+unless explicit written permission is granted by the corresponding Copyright
+Holder. This restriction only applies to the primary font name as presented
+to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any Modified
+Version, except to acknowledge the contribution(s) of the Copyright Holder(s)
+and the Author(s) or with their explicit written permission.
+
+5) The Font Software, modified or unmodified, in part or in whole, must be
+distributed entirely under this license, and must not be distributed under
+any other license. The requirement for fonts to remain under this license
+does not apply to any document created using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT,
+TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR
+ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL,
+INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF
+CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE
+THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.
+```
