@@ -67,8 +67,8 @@ used for both verification and extraction, extraction refuses symlinks and
 submodules, and every git invocation runs under a hardened configuration. That
 last measure closed a real remote-code-execution path found during red teaming.
 
-**Verification that spawns real processes.** 71 adversarial test harnesses run on
-every change. They are not mocks. They start real daemons, real TLS listeners,
+**Verification that spawns real processes.** Every release is gated on 71
+adversarial test harnesses. They are not mocks. They start real daemons, real TLS listeners,
 real git servers, real PTYs, then kill things at the worst possible moment and
 assert the system survives. Restart resilience, cross-device isolation, spoofed
 frames, tampered backups, hostile relays, and rollback are all regression-covered.
