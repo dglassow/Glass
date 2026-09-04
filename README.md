@@ -1,175 +1,151 @@
 # Glass
 
-### Your machines. Your agents. One app that never loses your place.
+### Everything running on your computers, on every screen you own.
 
-![The Glass desktop app: a sidebar of bots, rooms, and live terminals across four machines, with an AI agent session open in the main pane](assets/glass.png)
+![The Glass app: a list of AI assistants, rooms, and live sessions across four computers, with one assistant's session open in the main pane](assets/glass.png)
 
-Close the lid. Get on a plane. Open Glass on your phone. The build is still
-running, the agent is still working, and every line of scrollback is exactly
-where you left it.
+Start something on your desktop. Close the lid. Open Glass on your phone an hour
+later and it is still going, exactly where you left it.
 
-Glass is a self-hosted client for terminal sessions and AI coding agents across
-your own computers. Sessions live in a daemon that outlives the app, so updates,
-restarts, crashes, and dead Wi-Fi never touch them. No company sits between you
-and your machines. No account. No cloud.
+Glass connects the computers you already own into one place you can reach from
+anywhere. Your work keeps running on those machines whether or not the app is
+open, whether or not your laptop is awake, and whether or not you are on the same
+network. Nothing goes through anybody else's servers, because there aren't any.
 
-### **[⬇ Download Glass 0.3.0 for macOS](../../releases/latest)**
+### **[⬇ Download Glass 0.3.0 for Mac](../../releases/latest)**
 
-Apple Silicon. Signed with a Developer ID and notarized by Apple. Drag to
-Applications and launch.
+For Apple Silicon Macs. Checked and approved by Apple. Drag it to Applications
+and open it.
 
 ---
 
-## The problem
+## What it's for
 
-SSH drops the moment your laptop sleeps. `tmux` keeps a session alive on exactly
-one box and offers nothing on a phone. Your AI agents each run in their own
-silo, on one machine, blind to each other. And updating any of it kills whatever
-was running.
+If you use more than one computer, work gets stranded. A long task is running on
+the machine at home while you are out with the laptop. A file you need is on the
+other desk. An AI assistant you set going has no idea what you asked the one on
+your other machine.
 
-Every one of those is a consequence of treating the session as disposable.
+Glass makes all of those computers act like one. You see everything that is
+running, everywhere, from whichever screen is in front of you. You can pick up
+any of it, hand work to any machine, and put your phone away without stopping it.
 
-## The fix
+## Why people use it
 
-Glass treats the session as the thing worth protecting, and builds everything
-else around that.
+**Your work does not stop when the app does.** The part of Glass that keeps your
+work running is separate from the part you look at. Close the window, update the
+app, let the laptop die: the work carries on untouched, and it is all still there
+when you come back. Most tools lose everything at that moment. This one is built
+so that it can't.
 
-**Terminals that outlive the software running them.** PTY file descriptors live
-in a daemon separate from the app. The process that routes your traffic gets
-swapped blue/green: the replacement has to pass a health check before the old one
-retires, and a failure rolls back instantly. Your shell never notices. Neither
-does the agent working inside it.
+**Updates that cannot break you.** When Glass updates itself, it starts the new
+version alongside the old one and checks that it genuinely works before retiring
+anything. If the new version has a problem, the old one is simply still there.
+You do not get a broken machine and a bad afternoon.
 
-**A relay that physically cannot read your traffic.** Reaching your machines from
-anywhere usually means trusting a middleman. Glass uses a bare VPS running
-nothing but stock `sshd`. Your hub dials out and holds a reverse tunnel, TLS
-terminates inside your hub instead of at the relay, and clients pin the hub's
-identity bound to the TLS exporter. A man-in-the-middle holding a perfectly valid
-certificate still gets refused. There is a test that stands up a real hostile
-relay to prove it.
+**Nobody in the middle.** Reaching your home computer from a coffee shop normally
+means routing through some company's servers. Glass uses a cheap rented server
+that acts as a dumb pipe and never holds the key to anything passing through it.
+Even if someone took that server over completely, your devices would refuse to
+talk to it. That is not a promise, it is something the software actively checks
+every single time it connects.
 
-**Keys, not passwords.** Every device carries an Ed25519 key and proves it by
-challenge and response. Adding a machine is a six-digit number match between the
-joiner and an approver, like pairing headphones. The first device on a fresh
-install bootstraps from a WebAuthn passkey, so there is no chicken and egg.
+**No passwords to steal.** Every device you add gets its own unforgeable
+identity. Adding a new one is a six-digit code you confirm on a device you
+already trust, the same way you pair headphones. There is no password anywhere
+for someone to guess, phish, or leak.
 
-**An updater built like it is under attack.** Backend services update only from
-SSH-signed git tags, verified against a key pinned outside the repository being
-checked. The fetched repository is treated as hostile throughout: tags resolve to
-an immutable object once and that same object is used for both verification and
-extraction, extraction refuses symlinks and submodules, and every git call runs
-hardened. That last measure closed a real remote-code-execution path found during
-red teaming.
-
-**Proof, not promises.** Every release is gated on 71 adversarial test harnesses.
-They are not mocks. They start real daemons, real TLS listeners, real git servers
-and real terminals, then kill things at the worst possible moment and assert the
-system survives.
+**Built to be broken on purpose.** Before any version is released, 71 automated
+tests try to destroy it: killing things mid-task, faking identities, corrupting
+backups, impersonating the server in the middle. It only ships if it survives all
+of them.
 
 ---
 
 ## What you can do with it
 
-**Run terminals across every machine you own.** Every device sees every machine's
-sessions live. Status dots tell you at a glance whether the agent in each
-terminal is idle, working, or waiting on you.
+**See every machine at once.** Every computer you own, every session running on
+it, live, from any of your devices. A colored dot tells you whether something is
+working away or waiting on an answer from you.
 
-**Run AI agents that outlive their window.** Etch, Codex, Claude, and any
-command-line agent you configure, working at the same time across machines, with
-one inbox for everything that needs your attention. Runs live in the daemon.
-Close the app, replace the worker, and they keep going.
+**Put AI assistants to work and walk away.** Run several at the same time across
+different machines. They keep working with the app closed. Everything that needs
+your decision collects in one place instead of scattering across windows.
 
-**Give the agents a team.** Durable bots that live on a device, each with its own
-engine, working folder, persona, editable memory, and optional real terminal. Put
-several in a room with you and they delegate to each other, one hop deep, behind
-a peer-approval gate. Every consent decision lands in a log. Routines start fresh
-threads on a schedule.
+**Give the assistants a team.** Each one lives on a machine with its own job, its
+own folder, its own memory and personality. Put a few in a room together and they
+hand work to each other, but only with your say-so. Every decision you approve is
+written down. You can also set them to start on a schedule.
 
-**Hand a bot the actual computer.** Mouse, keyboard, and screen, under an explicit
-approval scope, with a single-holder lease, live preview, and instant human
-takeover.
+**Let one drive the computer.** With your explicit permission, an assistant can
+use a machine's mouse, keyboard, and screen while you watch it happen and take
+over the moment you want to.
 
-**Keep secrets properly.** Envelope encryption over SQLite, a passphrase and an
-offline recovery key in independent keyslots, per-device scoping, and injection
-into a child process environment only. One encrypted bundle backs up secrets,
-trust, tokens, and every hosted git repository, and it passes a wipe-and-restore
-drill onto clean hardware.
+**Keep your passwords and keys safe.** A locked vault for the secrets your
+machines need, opened by a passphrase with a printed recovery key as a backup.
+One encrypted backup file holds everything, and restoring it onto a brand new
+computer is a tested procedure rather than a hope.
 
-**Browse from somewhere else.** Put a SOCKS exit on one machine and an isolated
-browser profile on another. Render locally, egress from the machine you choose.
-No pixel streaming, no lag.
+**Browse from a different computer.** Read pages on the laptop in front of you
+while they are actually fetched by the machine at home. Fast, because it is not
+streaming video of a screen at you.
 
-**Host your own git.** Your hub serves bare repositories to your devices over
-authenticated smart-HTTP on its existing TLS listener, with per-device tokens and
-per-repository access control.
+**Run your own private code storage.** Your own machine hosts your projects
+privately for your other devices, with no third party involved.
 
-**Carry it in your pocket.** The same frontend, served by your hub as an
-installable web app, with a focused surface for talking to your agents from
-anywhere.
+**Carry it on your phone.** Glass installs on a phone like a normal app and gives
+you a clean chat view for talking to your assistants from anywhere.
 
 ---
 
-## How it works
+## Is Glass for you?
 
-One codebase, three roles. Any supported desktop can be a **Hub** (registry,
-auth, vault, relay, updates, git hosting) or an **Agent** (hosts sessions), and
-every device is a **Viewer**.
+Honest answers, so you do not waste an afternoon.
 
-Four processes per machine: a supervisor that owns lifecycle and depends on
-nothing, a session daemon that owns terminals and agent runs and survives
-updates, a bot daemon, and a swappable worker. Every message on the wire carries
-its protocol version, so a hub mid-rollout can hold connections from devices on
-two versions at once.
+**Glass is a good fit if** you own several computers, you already work in
+technical tools day to day, and you want your own setup instead of a subscription
+to somebody else's.
 
----
+**Glass is not a good fit if** you want something that works the moment you sign
+up. There is no signup. You run this yourself, and that means setting up one of
+your machines as the hub the others connect through. That is deliberate. It is
+also the reason nobody else can read your data.
 
-## Scope
-
-- **macOS on Apple Silicon.** Debian 13 support is built and verified on native
-  amd64 and arm64 continuous integration, but no Debian artifact has shipped yet.
-- **Mobile is a web app, chat only.** Terminals, browser proxying, and computer
-  control are native features by design.
-- **You run the infrastructure.** Glass is personal infrastructure, not a hosted
-  product. Using it means running your own hub and enrolling your own devices.
-  That is the point: there is no server of ours holding anything of yours.
+**Right now it runs on Apple Silicon Macs.** Linux support is finished and tested
+but has not been released. The phone version is chat only.
 
 ---
 
 ## Questions
 
-**Is this just a terminal emulator?** It has one, but the value is the session
-layer beneath it: terminals that live in a daemon, reachable from every device
-you own, that survive the app being updated or replaced.
+**Do I need to be a programmer?** Realistically, yes. Glass is built for people
+who work in a terminal and use AI coding assistants. It does not try to be a
+general consumer app.
 
-**How is it different from `tmux` over SSH?** `tmux` pins a session to one host.
-It gives you nothing on a phone, no cryptographic device identity, no fleet-wide
-view, and no way to update itself without killing your work. Glass is built
-around those four gaps.
+**Where does my data go?** Onto your own computers, and nowhere else. The rented
+server in the middle only ever sees scrambled data it cannot unlock. Your
+conversations and screens travel directly between your own devices.
 
-**Does my data pass through anyone's servers?** No. The relay is a VPS you
-provision that runs only stock `sshd` and never sees plaintext. Thread content
-and screen frames travel point to point between your own devices, and the hub
-persists only content-free records.
+**What does it cost?** Nothing. It is free for personal use. You pay only for the
+cheap server in the middle if you want to reach your machines from outside your
+home.
 
-**Can I bring my own AI agents?** Yes. Etch, Codex, and Claude are supported
-directly, and any other command-line agent can be configured as a generic
-provider.
+**Can I use my own AI tools?** Yes. Etch, Codex, and Claude work out of the box,
+and other command-line assistants can be added.
 
-**Is it open source?** No. Glass is proprietary and the source is private. The
-published binaries are covered by the license here.
+**Is the code public?** No. Glass is private software. The app you download is
+covered by the license in this repository.
 
 ---
 
 ## License
 
-Glass is proprietary. [LICENSE](LICENSE) covers the published binaries: install
-and run it for personal, non-commercial use, and do not redistribute, resell,
-modify, or reverse engineer it.
+Glass is proprietary. [LICENSE](LICENSE) covers the app you download: install and
+use it yourself, for personal and non-commercial purposes, and do not
+redistribute, resell, modify, or take it apart.
 
-This repository holds the release artifacts, the license, and the third-party
-notices. The source is developed privately. Tags here exist only to anchor
-releases; they are not source revisions and are not signed source tags.
+This repository holds the downloads, the license, and the notices for other
+people's software included in the app. The source code is developed privately.
 
 Glass includes third-party components under their own licenses, reproduced in
-full in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Those terms govern
-those components and are not limited by the Glass license.
+full in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
