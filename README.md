@@ -58,6 +58,30 @@ data.
 
 **Today it's Apple Silicon Macs.** Linux is built and tested but not yet released.
 
+## Install on Mac
+
+On an Apple Silicon Mac running macOS 13.5 or newer:
+
+```sh
+brew tap dglassow/tap
+brew trust --cask dglassow/tap/glass
+brew install --cask dglassow/tap/glass
+```
+
+The [official Glass tap](https://github.com/dglassow/homebrew-tap) downloads the
+signed, notarized app directly from this repository's releases. You do not need
+Node or build tools. Open Glass after installation to set up your own hub or
+join an existing fleet; your AI tools are installed separately.
+
+Homebrew 7 requires explicit trust for third-party casks. Review the tap before
+trusting it; this grants trust only to Glass's packaging.
+
+Glass can update itself. Homebrew upgrades do not stop its persistent backend.
+Plain `brew uninstall --cask glass` removes the app and leaves its backend running.
+To deliberately stop Glass's services and remove the app, run `glass-uninstall`;
+your local data stays intact. Back up your fleet before removing active software.
+The [license](LICENSE) remains personal and non-commercial.
+
 ## Questions
 
 **Do I need to be a programmer?** Realistically, yes. Glass is for people who
